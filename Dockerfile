@@ -57,3 +57,6 @@ RUN set -eux; \
 # Install rust-wasm
 RUN curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
+#Install wasm runtime - cargo 
+RUN curl https://get.wasmer.io -sSfL | sh
+#RUN cargo install wasmer-cli
