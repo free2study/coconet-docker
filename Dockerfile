@@ -6,8 +6,8 @@ RUN apt-get -qq update && \
     apt-get install -qqy --no-install-recommends \
         ca-certificates \
         autoconf automake cmake dpkg-dev file git make patch \
-        libc-dev libc++-dev libgcc-10-dev libstdc++-10-dev  \
-        dirmngr gnupg2 lbzip2 wget xz-utils libtinfo5 curl && \
+        libc-dev libc++-dev libgcc-10-dev libstdc++-10-dev libglib2.0-0 libglu1 libxkbcommon0 \
+        dirmngr gnupg2 lbzip2 wget xz-utils libtinfo5 curl build-essential pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
 # Signing keys
@@ -50,6 +50,7 @@ RUN set -eux; \
     rm rustup-init; \
     rustup update; \	
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
+    rustup target add wasm32-unknown-unknown; \   
     rustup --version; \
     cargo --version; \
     rustc --version;
@@ -58,5 +59,6 @@ RUN set -eux; \
 RUN curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
 #Install wasm runtime - cargo 
-RUN curl https://get.wasmer.io -sSfL | sh
+RUN curl https://get.wasmer.io -sSfL | sh 
+#RUN curl https://wasmtime.dev/install.sh -sSf | sh
 #RUN cargo install wasmer-cli
